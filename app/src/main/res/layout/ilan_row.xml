@@ -1,0 +1,134 @@
+<com.google.android.material.card.MaterialCardView android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Media -->
+        <ImageView
+            android:id="@+id/ilanFotograf"
+            android:layout_width="match_parent"
+            android:layout_height="194dp"
+            tools:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+            android:scaleType="centerCrop"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- Title, secondary and supporting text -->
+            <TextView
+                android:id="@+id/baslik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Bagcilar 1+1 ev"
+                android:maxLines="1"
+                android:maxLength="40"
+                android:textSize="20sp"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:fontFamily="@font/wix_madefor"
+                android:textStyle="bold"
+                />
+            <!-- Title, secondary and supporting text -->
+            <TextView
+                android:id="@+id/tarih"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="22.05.2023"
+                android:maxLines="1"
+                android:textSize="14sp"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:fontFamily="@font/wix_madefor"
+                android:layout_marginStart="140dp"
+                />
+        </LinearLayout>
+            <TextView
+                android:id="@+id/paylasanIsim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="Umut Can Demir"
+                android:maxLines="1"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                android:fontFamily="@font/wix_madefor"
+                />
+            <TextView
+                android:id="@+id/aciklama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                tools:text="@tools:sample/lorem/random"
+                android:maxLines="4"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                android:fontFamily="@font/wix_madefor"
+                />
+
+            <LinearLayout
+                android:id="@+id/filtreLinear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="3 ay"
+                    android:fontFamily="@font/wix_madefor"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/baseline_access_time_24"
+                    android:drawablePadding="5dp">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/mesafe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="50km"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/wix_madefor"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/distance"
+                    android:drawablePadding="5dp">
+
+                </TextView>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/ilanaGit"
+                style="?attr/borderlessButtonStyle"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

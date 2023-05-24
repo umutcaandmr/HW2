@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuDuzenle"
+        android:title="@string/duzenle"
+        android:icon="@drawable/outline_person_24"
+        android:fontFamily="@font/wix_madefor">
+
+    </item>
+
+    <item
+        android:id="@+id/menuCikis"
+        android:icon="@drawable/baseline_exit_to_app_24"
+        android:title="@string/cikis"
+        android:fontFamily="@font/wix_madefor"
+        android:textColor="@color/red"> >
+    </item>
+
+
+</menu>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "713578174680",
+    "project_id": "ytu-ev",
+    "storage_bucket": "ytu-ev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713578174680:android:1551f43ff50fa837b51fad",
+        "android_client_info": {
+          "package_name": "com.umutdemir.ytuev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713578174680-5tlt08pctounmgbvsaua5lhncuebvtjb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umutdemir.ytuev",
+            "certificate_hash": "724f4cef5d32eb9acd703fe8dea664c7e9f6f26b"
+          }
+        },
+        {
+          "client_id": "713578174680-kbbqd2nlb2rts8b89kiq11rqjl1ksvp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoS0Par79o3GwMaoP4oWw1WWNmzVRsMtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713578174680-kbbqd2nlb2rts8b89kiq11rqjl1ksvp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/profilFragment">
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.umutdemir.ytuev.view.ProfilFragment"
+        android:label="ProfilFragment" >
+        <action
+            android:id="@+id/action_profilFragment_to_profilDuzenleFragment"
+            app:destination="@id/profilDuzenleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilDuzenleFragment"
+        android:name="com.umutdemir.ytuev.view.ProfilDuzenleFragment"
+        android:label="ProfilDuzenleFragment" >
+        <action
+            android:id="@+id/action_profilDuzenleFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+    </fragment>
+</navigation>
