@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -91,7 +92,21 @@ class ProfilFragment : Fragment() {
                 binding.profilUzaklik.text = kullanici.uzaklik + " km"
                 binding.progressBar.visibility = View.INVISIBLE
                 binding.layout.visibility = View.VISIBLE
-
+                //Toast.makeText(requireContext(),"alindi",Toast.LENGTH_SHORT).show()
+                viewModel.getIlan(kullanici, onSuccess = {ilan ->
+                    Toast.makeText(requireContext(),"alindi",Toast.LENGTH_SHORT).show()
+                    binding.ilanLayout.visibility = View.VISIBLE
+                    binding.paylasanIsim.text = ilan.paylasanIsim
+                    if(ilan.fotograf != ""){
+                        Picasso.get().load(ilan.fotograf).into(binding.ilanFotograf)
+                    }
+                    binding.ilanLayout.visibility = View.VISIBLE
+                    binding.aciklama.text = ilan.aciklama
+                    binding.baslik.text = ilan.baslik
+                    binding.mesafe.text = ilan.mesafe
+                    binding.sure.text = ilan.sure
+                    binding.tarih.text = ilan.tarih.toDate().toString()
+                })
             }
 
         }, onFailure = {exception ->

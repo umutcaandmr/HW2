@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.umutdemir.ytuev.databinding.IlanRowBinding
 import com.umutdemir.ytuev.model.Ilan
+import com.umutdemir.ytuev.view.IlanDetayFragment
+import com.umutdemir.ytuev.view.IlanEkleFragment
+import com.umutdemir.ytuev.view.MainActivity
 
 
 class IlanRecyclerAdapter(val ilanList: ArrayList<Ilan>) :
@@ -36,6 +39,7 @@ class IlanRecyclerAdapter(val ilanList: ArrayList<Ilan>) :
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
+        val activity = context as MainActivity
         val ilan = filteredData[position]
 
         holder.itemBinding.paylasanIsim.text = ilan.paylasanIsim
@@ -47,7 +51,13 @@ class IlanRecyclerAdapter(val ilanList: ArrayList<Ilan>) :
         holder.itemBinding.mesafe.text = ilan.mesafe
         holder.itemBinding.sure.text = ilan.sure
         holder.itemBinding.tarih.text = ilan.tarih.toDate().toString()
+
+        holder.itemBinding.ilanaGit.setOnClickListener{
+            activity.loadFragment(IlanDetayFragment(ilan))
+        }
     }
+
+
 
     override fun getItemCount(): Int {
         return filteredData.size

@@ -2,8 +2,10 @@ package com.umutdemir.ytuev.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.umutdemir.ytuev.model.Ilan
 import com.umutdemir.ytuev.model.Kullanici
 
 class ProfilViewModel : ViewModel() {
@@ -47,6 +49,23 @@ class ProfilViewModel : ViewModel() {
         }.addOnFailureListener {
             callback(false)
         }
+    }
+
+    fun getIlan(kullanici: Kullanici,onSuccess: (Ilan) -> Unit) {
+        val ilanListesi = arrayListOf<Ilan>()
+        println(kullanici.mail)
+        db.collection("Ilanlar").whereEqualTo("paylasanMail",kullanici.mail).get()
+            .addOnSuccessListener { ilanList ->
+                ilanListesi.clear()
+                for (ilan in ilanList) {
+                    ilanListesi.add(ilan.toObject(Ilan::class.java))
+                }
+                val ilan = ilanListesi[0]
+                println("ilan : $ilan")
+                onSuccess(ilan)
+            }
+
+
     }
 
 

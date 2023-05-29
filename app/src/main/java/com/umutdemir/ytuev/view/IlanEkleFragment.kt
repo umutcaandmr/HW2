@@ -2,21 +2,20 @@ package com.umutdemir.ytuev.view
 
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -49,6 +48,7 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     private var adresler = arrayListOf<Adres>()
     private var adres: Adres? = null
     private lateinit var kullaniciKonum: LatLng
+    private lateinit var  mapFragment : SupportMapFragment
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         // Callback is invoked after the user selects a media item or closes the
         // photo picker.
@@ -63,6 +63,7 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,7 +74,7 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        val ilanKonum = LatLng(0.0,0.0)
         ilanViewModel = ViewModelProvider(this)[IlanViewModel::class.java]
         profilViewModel = ViewModelProvider(this)[ProfilViewModel::class.java]
         adresAramaManager = AdresAramaManager(requireContext())
@@ -141,6 +142,14 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
         }
 
         binding.paylasButon.setOnClickListener {
+            val konum = adres!!.konum
+            val results = FloatArray(1)
+            Location.distanceBetween(
+                41.021180043627695, 28.898643334027827,
+                konum.latitude, konum.longitude,
+                results
+            )
+            val mesafe = String.format("%.1f km", results[0] / 1000)
             ilanViewModel.fotografPaylas(selectedUri, onSuccess = { url ->
                 fotografUrl = url
                 Toast.makeText(requireContext(), fotografUrl, Toast.LENGTH_SHORT).show()
@@ -152,11 +161,14 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
                             ilce = binding.ilanIlce.text.toString(),
                             paylasanIsim = kullanici.isim,
                             paylasanNumara = kullanici.numara,
+                            paylasanMail = kullanici.mail,
                             fotograf = fotografUrl,
                             aciklama = binding.ilanAciklama.text.toString(),
-                            mesafe = uzaklik.toString(),
+                            mesafe = mesafe,
                             sure = binding.ilanSure.text.toString(),
                             fiyat = binding.ilanFiyat.text.toString(),
+                            konumEnlem = adres!!.konum.latitude,
+                            konumBoylam = adres!!.konum.longitude,
                             tarih = com.google.firebase.Timestamp.now()
                         )
                         ilanViewModel.shareIlan(ilan, callback = {
@@ -182,6 +194,16 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
 
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        mapFragment.getMapAsync {
+            setupMap(it)
+        }
+    }
     override fun onMapReady(p0: GoogleMap) {
         setupMap(p0)
     }
@@ -193,7 +215,14 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     override fun onMarkerDragEnd(p0: Marker) {
         Toast.makeText(requireContext(), "deneme", Toast.LENGTH_SHORT).show()
         val konum = p0.position
-        Toast.makeText(requireContext(), konum.latitude.toString(), Toast.LENGTH_SHORT).show()
+        val results = FloatArray(1)
+        Location.distanceBetween(
+            41.021180043627695, 28.898643334027827,
+            konum.latitude, konum.longitude,
+            results
+        )
+        val km = String.format("%.1f", results[0] / 1000)
+        Toast.makeText(requireContext(),"$km km", Toast.LENGTH_SHORT).show()
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             geocoder.getFromLocation(konum.latitude, konum.longitude, 1
@@ -207,6 +236,7 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
                 binding.searchView.setQuery("", false)
                 binding.searchView.clearFocus()
                 binding.searchView.queryHint = addresses[0].getAddressLine(0)
+
             }
         }
     }
