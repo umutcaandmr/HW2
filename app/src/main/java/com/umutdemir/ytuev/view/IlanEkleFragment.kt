@@ -152,7 +152,6 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
             val mesafe = String.format("%.1f km", results[0] / 1000)
             ilanViewModel.fotografPaylas(selectedUri, onSuccess = { url ->
                 fotografUrl = url
-                Toast.makeText(requireContext(), fotografUrl, Toast.LENGTH_SHORT).show()
                 profilViewModel.getUserData(onSuccess = { kullanici ->
                     if (kullanici != null) {
                         val ilan = Ilan(
@@ -173,7 +172,6 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
                         )
                         ilanViewModel.shareIlan(ilan, callback = {
                             if (it) {
-                                Toast.makeText(requireContext(), "tamam", Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(requireContext(), "hata", Toast.LENGTH_SHORT).show()
 
@@ -213,7 +211,6 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
     }
 
     override fun onMarkerDragEnd(p0: Marker) {
-        Toast.makeText(requireContext(), "deneme", Toast.LENGTH_SHORT).show()
         val konum = p0.position
         val results = FloatArray(1)
         Location.distanceBetween(
@@ -222,7 +219,6 @@ class IlanEkleFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragL
             results
         )
         val km = String.format("%.1f", results[0] / 1000)
-        Toast.makeText(requireContext(),"$km km", Toast.LENGTH_SHORT).show()
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             geocoder.getFromLocation(konum.latitude, konum.longitude, 1
